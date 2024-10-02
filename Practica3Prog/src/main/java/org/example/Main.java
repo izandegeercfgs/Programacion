@@ -6,7 +6,7 @@ import java.util.Scanner;
 public class Main {
     public static void main(String[] args) {
         boolean error = true;
-        edadlegal = 18;
+        final int edadlegal = 18;
         Scanner entradaEscaner = new Scanner(System.in); // Crear el objeto Scanner una vez
         System.out.printf("Introduce tu nombre: ");
         String nombre = entradaEscaner.nextLine(); // Leer el nombre
