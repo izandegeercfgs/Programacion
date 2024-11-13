@@ -157,14 +157,106 @@ public class BateriaEjercicios {
         }
     }
 
-    public void vectores2 () {
+    public void navidad () {
 
-        String palabras [] = {"Paco", "Pepe", "Juan", "María"};
+        Scanner entrada = new Scanner(System.in);
 
-        for (String i : palabras){
-            System.out.println(i);
+        final String palabra = "NAVIDAD";
+
+        System.out.println("Introduce cuantas leras quieres añadir...");
+        String cantidad = entrada.nextLine();
+
+        String cantidades[] = cantidad.split(" ");
+        String letras[] = palabra.split("");
+
+        System.out.println(Arrays.toString(cantidades));
+        System.out.println(Arrays.toString(letras));
+
+        String resultado = "";
+
+        for (int i = 0; i < letras.length; i++) {
+
+            for (int j = 0; j < Integer.parseInt(cantidades[i]); j++) {
+
+                resultado = resultado.concat(letras[i]);
+
+            }
         }
-        String texto_vector = Arrays.toString(palabras);
-        System.out.println(texto_vector);
+
+        System.out.println(resultado);
+    }
+
+    public void ruleta () {
+
+        Scanner teclado = new Scanner(System.in);
+        Random random = new Random();
+
+        String colores[] = {"rojo", "negro"};
+        Integer numeros[] = new Integer[37];
+
+        for (int i = 0; i < numeros.length; i++) {
+            numeros[i] = i;
+        }
+
+        String pares[] = {"par", "impar"};
+
+        System.out.println("Introduce un número (0-36): ");
+
+        int numero = teclado.nextInt();
+        boolean numero_existe = Arrays.asList(numeros).contains(numero);
+        String color = "";
+        String par = "";
+
+        if (!numero_existe){
+            System.out.println("ERROR. El número no es válido.");
+            return;
+        } else {
+            if (numero!=0){
+                System.out.println("Color (rojo-negro): ");
+                color = teclado.next().toLowerCase();
+
+                boolean color_existe = Arrays.asList(colores).contains(color);
+
+                if (!color_existe){
+                    System.out.println("ERROR. El color no es válido");
+                    return;
+                } else {
+                    System.out.println("Introduce la opción par o impar: ");
+                    par = teclado.next().toLowerCase().trim();
+
+                    boolean par_existe = Arrays.asList(pares).contains(par);
+
+                    if (!par_existe){
+                        System.out.println("ERROR. La opción par/impar no es válida.");
+                        return;
+                    }
+                }
+            }
+        }
+        int numero_sorteo = numeros[random.nextInt(37)];
+        String color_sorteo = colores[random.nextInt(2)];
+        String pares_sorteo = "";
+
+        if (numero_sorteo % 2 == 0) {
+            pares_sorteo = "par";
+        } else {
+            pares_sorteo = "impar";
+        }
+
+        System.out.println("Los resultados ganadores han sido: " + numero_sorteo + ", " + color_sorteo + " y " + pares_sorteo);
+
+        if (numero!=0 && numero_sorteo == numero && color_sorteo.equals(color) && pares_sorteo.equals(par)) {
+            System.out.println("¡Has ganado!");
+        } else if (numero!=0 && color_sorteo.equals(color)){
+            System.out.println("¡Has acertado únicamente el color!");
+        } else if (numero!=0 && pares_sorteo.equals(par)) {
+            System.out.println("¡Has acertado la opción par/impar!");
+        } else if (numero == numero_sorteo && numero != 0) {
+            System.out.println("¡Has acertado el número!");
+        } else if (numero == 0 && numero_sorteo == 0) {
+            System.out.println("¡Has ganado y los demás pierden!");
+        } else {
+            System.out.println("¡Has perdido!");
+        }
     }
 }
